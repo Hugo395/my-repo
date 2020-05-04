@@ -31,22 +31,27 @@ router.post("/sign-up", (req,res,next)=>{
   //Making sure that user doens't exist already
 User.findOne({"username":username})
   .then(user => {
+    console.log(user)
     if(user!==null){
       res.render("auth/sign-up",{
       errorMessage: "The username already exists"
     })
+    
+
   return}
-  })
 
   User.create({username, password: hashPass})
-    .then(() => {
-      res.redirect("/")
-    })
-    .catch(error => {
-      next(error)
-    })
+  .then(() => {
+    res.redirect("/")
+  })
+  .catch(error => {
+    next(error)
+  })
+})
+  
   })
 
+  
   router.get("/login",(req,res,next)=>{
     try{
       res.render("auth/login")
@@ -77,7 +82,7 @@ User.findOne({"username":username})
       }
       if(bcrypt.compareSync(password, user.password)){
         req.session.currentUser=user
-        res.redirect("/")
+        res.redirect("/main")
       }else{
         res.render("auth/login",{
           errorMessage: "Incorrect password"

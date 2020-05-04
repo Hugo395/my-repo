@@ -64,8 +64,11 @@ app.locals.title = 'Trivia-Game';
 
 const auth = require('./routes/auth-routes')
 app.use('/',auth)
-const index = require('./routes/index');
-app.use('/', index);
+
+const site = require('./routes/site-routes')
+app.use('/',site);
+
+
 
 
 
