@@ -3,8 +3,22 @@
   <input id="username" type="text" name="username" placeholder="Jonh">
   <label for ="password">Password</label>
   <input id="password" type="password" name="password">
+  <label>Avatar</label>
+  <div></div>
+  <select id="Avatar">
+    <option value="avatar1" id="avatar1"></option>
+    <option value="avatar2" style="background-image:avatar2@adorable.io.png"></option>
+    <option value="avatar3" style="background-image:avatar3@adorable.io"></option>
+    <option value="avatar4" style="background-image:avatar4@adorable.io"></option>
+</select>
   {{#if errorMessage}}
     <div class = "error-message">{{errorMessage}}</div>
     {{/if}}
+  {{#if warning}}
+    <div>Warning:{{warning}}</div>
+  {{/if}}
+    {{#if suggestion}}
+    <div>Suggestion:{{suggestion}}</div>
+  {{/if}}
   <button type="submit">Create Account</button>
 </form>

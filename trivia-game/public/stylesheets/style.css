@@ -5,4 +5,10 @@ body {
 a {
   color: #00B7FF; }
 
+#avatar1{
+  /*background-color: black;*/
+  height: 150px;
+  width: 150px;
+  background-image: url(https://api.adorable.io/avatars/150/avatar1@adorable.io.png);
+}
 /*# sourceMappingURL=style.css.map */
