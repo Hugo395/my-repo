@@ -17,15 +17,14 @@ router.get("/sign-up", (req, res, next) => {
 router.post("/sign-up", (req,res,next)=>{
   const username = req.body.username
   const password = req.body.password
-  const passwordStrengh = zxcvbn(password)  
-
+  const avatar = req.body.avatar
+  const passwordStrengh = zxcvbn(password)
   const salt = bcrypt.genSaltSync(bcryptSalt)
   const hashPass = bcrypt.hashSync(password,salt)
   //const isPassword = password.match(/[A-Z]/g)
   //if(!isPasswordOk){}
 
   //Making sure username and password are not empty
-  console.log(passwordStrengh)
   if(username === "" || password === ""){
     res.render("auth/sign-up", {
       errorMessage: "Indicate a username and password"
@@ -53,7 +52,7 @@ User.findOne({"username":username})
 
   return}
 
-  User.create({username, password: hashPass})
+  User.create({username, password: hashPass , avatar:avatar})
   .then(() => {
     res.redirect("/")
   })
