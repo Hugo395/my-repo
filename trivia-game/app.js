@@ -11,6 +11,7 @@ const path         = require('path');
 const session      = require ("express-session")
 const MongoStore  = require("connect-mongo")(session)
 
+
 mongoose
   .connect('mongodb://localhost/trivia-game', {useNewUrlParser: true})
   .then(x => {
