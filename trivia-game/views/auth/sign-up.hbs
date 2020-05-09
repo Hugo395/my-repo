@@ -8,15 +8,15 @@
     });
 </script>
 
-<form id="form"action="/sign-up" method="POST">
+<form id="form"action="/sign-up" method="POST" enctype="multipart/form-data">
   <label for ="username">Username</label>
   <input id="username" type="text" name="username" placeholder="Jonh">
   <label for ="password">Password</label>
   <input id="password" type="password" name="password">
   <label>Avatar</label>
-  
 
   <select name="avatar" id="menu">
+    <option value=""></option>
     <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar1@adorable.io.png"></option>
     <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar2@adorable.io.png"></option>
     <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar3@adorable.io.png"></option>
@@ -25,7 +25,8 @@
     <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar6@adorable.io.png"></option>
   </select>
 
-
+  <label>Photo</label>
+  <input type="file" name="photo">
 
   {{#if errorMessage}}
     <div class = "error-message">{{errorMessage}}</div>

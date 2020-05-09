@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt")
 const bcryptSalt = 10
 const  zxcvbn = require('zxcvbn');
 zxcvbn('Tr0ub4dour&3');
+const uploadCloud = require('../config/cloudinary.js');
 
 router.get("/sign-up", (req, res, next) => {
   try {
@@ -14,13 +15,15 @@ router.get("/sign-up", (req, res, next) => {
   }
 });
 
-router.post("/sign-up", (req,res,next)=>{
+router.post("/sign-up", uploadCloud.single('photo'),(req,res,next)=>{
   const username = req.body.username
   const password = req.body.password
   const avatar = req.body.avatar
   const passwordStrengh = zxcvbn(password)
   const salt = bcrypt.genSaltSync(bcryptSalt)
   const hashPass = bcrypt.hashSync(password,salt)
+
+
   //const isPassword = password.match(/[A-Z]/g)
   //if(!isPasswordOk){}
 
@@ -50,15 +53,41 @@ User.findOne({"username":username})
     })
     
 
-  return}
+  return
+}
+console.log(req.file)
+  if(!req.file){
+    if(avatar){
+      User.create({username, password: hashPass , avatar:avatar, imgPath: "", imgName: ""})
+      .then(() => {
+        res.redirect("/")
+      })
+      .catch(error => {
+        next(error)
+      })
+    }
+    else{
+      res.render("auth/sign-up", {
+        errorMessage: "Please fill in Avatar or Photo"
+      })
+      return
+    }
 
-  User.create({username, password: hashPass , avatar:avatar})
-  .then(() => {
-    res.redirect("/")
-  })
-  .catch(error => {
-    next(error)
-  })
+  }
+  
+else{
+    const imgPath = req.file.url
+    const imgName = req.file.originalname
+
+    User.create({username, password: hashPass , avatar:"", imgPath, imgName})
+    .then(() => {
+      res.redirect("/")
+    })
+    .catch(error => {
+      next(error)
+    })
+  } 
+
 })
   
   })
@@ -101,4 +130,7 @@ User.findOne({"username":username})
       }
     })
   })
+
+
+
   module.exports = router;

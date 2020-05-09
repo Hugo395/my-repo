@@ -1,8 +1,5 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-
   console.log('IronGenerator JS imported successfully!');
-
 }, false);
 let score=0
 debugger
@@ -18,28 +15,22 @@ debugger
 document.getElementById('dice').addEventListener('click',() => {
   event.preventDefault();
   const category_id = Math.floor(Math.random()*24) +9
-
 axios
 .get(`https://opentdb.com/api.php?amount=1&category=${category_id}`)
 .then(response =>{
   console.log(response)
   const category = response.data.results[0].category
   console.log(category)
-  
   let button = document.getElementById('dice')
   button.style.visibility = "hidden"
   console.log(button)
-
   const newCharacterHTML= 
   `
-    <h3>${category}</h3>
- 
+    <h3 id="category">${category}</h3>
   `
   document.getElementById('ShowMe').innerHTML += newCharacterHTML;
   //debugger
-
-  let timer = setTimeout(() => {
-    
+  let timerQuestion = setTimeout(() => {
     function escapeHtml(text) {
       return text
           .replace(/&amp;/g,'&' )
@@ -47,12 +38,13 @@ axios
           .replace(/&gt;/g,'>')
           .replace(/&quot;/g,'"')
           .replace(/&#039;/g,"'")
+          .replace(/&deg;/g,"°")
     }
     debugger
     const question = document.createElement('H4')
+    question.setAttribute("id","question")
     const possibleResponses = response.data.results[0].incorrect_answers
     const correct_answer= response.data.results[0].correct_answer
-    
     possibleResponses.push(correct_answer)
     console.log(possibleResponses)
     shuffle(possibleResponses)
@@ -66,43 +58,45 @@ axios
       ele.innerText = answer
       document.getElementById('ShowMe').appendChild(ele)
     });
-    
     document.querySelectorAll(".response").forEach(response => {
       response.addEventListener('click', event => {
         if(response.innerText===correct_answer){                        //Correct answer
           document.querySelectorAll(".response").forEach(option => {
-            option.setAttribute("class","red")                          //All red
+            option.setAttribute("class","response red")                          //All red
           })
-          response.classList.remove("red")
-          response.setAttribute("class","green")                        //Correct green
+          //response.classList.remove("red")
+          response.setAttribute("class","response green")                        //Correct green
           score++;
-          button.style.visibility = "visible"
+          document.getElementById("score").innerText=`Score : ${score}`          
         }
         else{                                                           //Wrong asnwer
           document.querySelectorAll(".response").forEach(option => {
-            option.setAttribute("class","red")          
+            option.setAttribute("class","response red")          
             if(option.innerText===correct_answer){
-              option.classList.remove("red")
-              option.setAttribute("class","green")
+              //option.classList.remove("red")
+              option.setAttribute("class","response green")
             }
           })
-          response.setAttribute("class","red")
-          button.style.visibility = "visible"
-        }
+          response.setAttribute("class","response red")
+        } 
+        let cleanScreen = setTimeout(() => {
+        button.style.visibility = "visible"
+        document.getElementById("category").remove()
+        document.getElementById("question").remove()
+        console.log(document.querySelectorAll(".response"))
+        document.querySelectorAll(".response").forEach(response => {
+          response.remove()
+        })
+      },1000)
       })
     })
-     
   }, 1000); 
-
 }).catch(err =>{
   console.log(err)
 })
-
 })
-
 //}
 //while(score<2)
-
 //document.getElementsByClassName("board").innerHTML= `<h1>Game ended</h1>`
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
