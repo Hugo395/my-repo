@@ -15,15 +15,15 @@ debugger
 document.getElementById('dice').addEventListener('click',() => {
   event.preventDefault();
   const category_id = Math.floor(Math.random()*24) +9
+  let button = document.getElementById('dice')
+  button.style.visibility = "hidden"
+  button.setAttribute("disabled","true")
 axios
 .get(`https://opentdb.com/api.php?amount=1&category=${category_id}`)
 .then(response =>{
   console.log(response)
   const category = response.data.results[0].category
   console.log(category)
-  let button = document.getElementById('dice')
-  button.style.visibility = "hidden"
-  console.log(button)
   const newCharacterHTML= 
   `
     <h3 id="category">${category}</h3>
@@ -80,7 +80,9 @@ axios
           response.setAttribute("class","response red")
         } 
         let cleanScreen = setTimeout(() => {
+        console.log(button)
         button.style.visibility = "visible"
+        button.removeAttribute("disabled")
         document.getElementById("category").remove()
         document.getElementById("question").remove()
         console.log(document.querySelectorAll(".response"))
