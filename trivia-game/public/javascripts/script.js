@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('IronGenerator JS imported successfully!');
 }, false);
 let score=0
-debugger
+
 //do{
 //document.getElementsByClassName("board").innerHTML =``
 /*document.getElementsByClassName("board").innerHTML = `
@@ -31,21 +31,13 @@ axios
   document.getElementById('ShowMe').innerHTML += newCharacterHTML;
   //debugger
   let timerQuestion = setTimeout(() => {
-    function escapeHtml(text) {
-      return text
-          .replace(/&amp;/g,'&' )
-          .replace(/&lt;/g, '<')
-          .replace(/&gt;/g,'>')
-          .replace(/&quot;/g,'"')
-          .replace(/&#039;/g,"'")
-          .replace(/&deg;/g,"°")
-    }
-    debugger
+
+    
     const question = document.createElement('H4')
     question.setAttribute("id","question")
     const possibleResponses = response.data.results[0].incorrect_answers
     const correct_answer= response.data.results[0].correct_answer
-    possibleResponses.push(correct_answer)
+    possibleResponses.push(escapeHtml(correct_answer))
     console.log(possibleResponses)
     shuffle(possibleResponses)
     console.log(possibleResponses)
@@ -55,14 +47,18 @@ axios
     possibleResponses.forEach(answer => {
       let ele = document.createElement('BUTTON')
       ele.setAttribute("class","response")
-      ele.innerText = answer
+      ele.innerText = escapeHtml(answer)
       document.getElementById('ShowMe').appendChild(ele)
     });
     document.querySelectorAll(".response").forEach(response => {
       response.addEventListener('click', event => {
+        console.log("Clicked response")
+        console.log(response)
+        //response.setAttribute("disabled","true")                       
         if(response.innerText===correct_answer){                        //Correct answer
           document.querySelectorAll(".response").forEach(option => {
-            option.setAttribute("class","response red")                          //All red
+            option.setAttribute("class","response red")                 //All red
+            option.setAttribute("disabled","true")                      //prevent multiple clicks
           })
           //response.classList.remove("red")
           response.setAttribute("class","response green")                        //Correct green
@@ -75,6 +71,7 @@ axios
             if(option.innerText===correct_answer){
               //option.classList.remove("red")
               option.setAttribute("class","response green")
+              option.setAttribute("disabled","true")
             }
           })
           response.setAttribute("class","response red")
@@ -100,9 +97,21 @@ axios
 //}
 //while(score<2)
 //document.getElementsByClassName("board").innerHTML= `<h1>Game ended</h1>`
+
+/////////////////////////////////////Auxiliary functions///////////////////////////////////////////////////
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+}
+
+function escapeHtml(text) {
+  return text
+      .replace(/&amp;/g,'&' )
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g,'>')
+      .replace(/&quot;/g,'"')
+      .replace(/&#039;/g,"'")
+      .replace(/&deg;/g,"°")
 }
