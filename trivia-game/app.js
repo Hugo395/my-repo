@@ -11,7 +11,6 @@ const path         = require('path');
 const session      = require ("express-session")
 const MongoStore  = require("connect-mongo")(session)
 
-
 mongoose
   .connect('mongodb://localhost/trivia-game', {useNewUrlParser: true})
   .then(x => {
@@ -43,7 +42,6 @@ app.use(session({
     ttl: 24 * 60 * 60 // session living on the server - 1day
   })
 }))
-
 
 // Express View engine setup
 

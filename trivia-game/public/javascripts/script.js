@@ -115,3 +115,9 @@ function escapeHtml(text) {
       .replace(/&#039;/g,"'")
       .replace(/&deg;/g,"°")
 }
+
+function setCanvasHeight(){
+const canvas = document.getElementById('canvas')
+let heightRatio = 1.5
+canvas.height = canvas.width * heightRatio
+}
