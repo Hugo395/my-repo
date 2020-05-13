@@ -12,6 +12,10 @@ let score=0
 </div>
 `
 */
+const $canvas = document.getElementById("canvas")
+const $trivia= new Trivia($canvas)
+$trivia.initialBoard()
+
 document.getElementById('dice').addEventListener('click',() => {
   event.preventDefault();
   const category_id = Math.floor(Math.random()*24) +9
@@ -114,10 +118,4 @@ function escapeHtml(text) {
       .replace(/&quot;/g,'"')
       .replace(/&#039;/g,"'")
       .replace(/&deg;/g,"°")
-}
-
-function setCanvasHeight(){
-const canvas = document.getElementById('canvas')
-let heightRatio = 1.5
-canvas.height = canvas.width * heightRatio
 }
