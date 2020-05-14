@@ -14,7 +14,7 @@ let score=0
 */
 const $canvas = document.getElementById("canvas")
 const $trivia= new Trivia($canvas)
-$trivia.initialBoard()
+$trivia.displayBoard()
 
 document.getElementById('dice').addEventListener('click',() => {
   event.preventDefault();
