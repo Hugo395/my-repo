@@ -5,12 +5,13 @@ class Trivia{
     this.height= this.canvas.height
     this.width = this.canvas.width
     this.categories = this.categoriesFill(5,37)
+    this.colors=['red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray','orange','purple', ];
   }
 
 categoriesFill(numberOfCategories,numberOfSpots){
       let myBoardGame = []
       for(let i=0;i<numberOfSpots;i++){
-
+        if(i===0){}
       myBoardGame.push(Math.floor(Math.random()*numberOfCategories))
 
     }
@@ -18,9 +19,29 @@ categoriesFill(numberOfCategories,numberOfSpots){
 }
 
 printCategories(){
-  
-   this.ctx.font = "30px Arial";
-   this.ctx.strokeText("Hello World", 10, 50);
+  this.ctx.beginPath()
+  this.ctx.lineWidth = 2
+  this.ctx.strokeStyle ="black"
+  this.ctx.font = "30px Arial";
+  this.ctx.strokeText("E", 440, 50)
+  this.ctx.strokeText("S", 540, 50)
+  this.ctx.strokeText("H", 610, 80)
+  this.ctx.strokeText("P", 370, 80)
+  this.ctx.strokeText("A", 309, 140)
+  this.ctx.strokeText("A", 670, 140)
+  this.ctx.strokeText("H", 280, 210)
+  this.ctx.strokeText("P", 700, 210)
+//////////////////////////////////////////
+
+  this.ctx.strokeText("A", 440, 475)
+  this.ctx.strokeText("H", 540, 475)
+  this.ctx.strokeText("S", 610, 445)
+  this.ctx.strokeText("P", 370, 445)
+  this.ctx.strokeText("E", 309, 390)
+  this.ctx.strokeText("E", 670, 390)
+  this.ctx.strokeText("S", 280, 310)
+  this.ctx.strokeText("P", 700, 310)
+  this.ctx.closePath()
   }
 
 circle (x,y,radius,color,radians){
@@ -36,8 +57,6 @@ circle (x,y,radius,color,radians){
     this.ctx.closePath()
 }
 drawPie(){
-// Colors
-let colors = ['red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray','orange','purple', ];
 
 // List of Angles
 let angles = [Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8, Math.PI /8];
@@ -55,11 +74,12 @@ for(let i = 0; i < angles.length; i = i + 1) {
   
   this.ctx.beginPath();
   // Fill color
-  this.ctx.fillStyle = colors[i % colors.length];
+  this.ctx.fillStyle = this.colors[i % this.colors.length];
   
   // Same code as before
   this.ctx.moveTo(this.width/2, this.height/2);
   this.ctx.arc(this.width/2, this.height/2, this.height/2, beginAngle, endAngle);
+  
   this.ctx.lineTo(this.width/2, this.height/2);
   this.ctx.stroke();
   
@@ -90,35 +110,40 @@ displayBoard(){
 
   this.line(this.width/2,this.height/2,this.width/2,this.height/2+this.height/2,"yellow",45)
   this.line(this.width/2,this.height/2,this.width/2,this.height/2-this.height/2,"yellow",45)
-  
+  this.line(this.width/2 ,0,this.width/2,63.5,"black",45)
+  this.line(this.width/2 ,this.height,this.width/2,this.height-63.5,"black",45)
   //Horizontal
   this.line(this.width/2,this.height/2,this.width/2+this.height/2,this.height/2,"yellow",45)
   this.line(this.width/2,this.height/2,this.width/2-this.height/2,this.height/2,"yellow",45)
-  
+  this.line(this.width/4 ,this.height/2,this.width/4 +62.5,this.height/2,"black",45)
+  this.line(this.width -250 ,this.height/2,this.width-314.5,this.height/2,"black",45)
   //Horizontal divisions
-for(let i=0;i<this.height/2-48;i=i+(((this.height/2-24)-(this.height/2-188))/4)){
-
-  this.line(this.width/2-22,this.height/2-188+i,this.width/2+22,this.height/2-188+i,"black",1)
-
+for(let i=0, j=1;i<this.height/2-48;i=i+(((this.height/2-24)-(this.height/2-188))/4),j++){
+ 
+  this.line(this.width/2-22,this.height/2-164+i,this.width/2+22,this.height/2-164+i,this.colors[j],40)
 }
-for(let i=0;i<this.height/2-48;i=i+(((this.height/2+188)-(this.height/2+24))/4)){
+for(let i=0,j=0;i<this.height/2-48;i=i+(((this.height/2+188)-(this.height/2+24))/4),j++){
 
-  this.line(this.width/2-22,(this.height/2+24)+i,this.width/2+22,(this.height/2+24)+i,"black",1)
-
+  this.line(this.width/2-22,(this.height/2)+i,this.width/2+22,(this.height/2)+i,this.colors[j],40)
+  //this.line(this.width/2-22,this.height/2-164+i,this.width/2+22,this.height/2-164+i,this.colors[j],40)
 }
 
 // Vertical divisions
 
-for(let i=0;i<this.width/8+40;i=i+(((this.width/2-24)-(this.width/2-188))/4)){
+for(let i=0,j=0;i<this.width/8+40;i=i+(((this.width/2-24)-(this.width/2-188))/4),j++){
 
-  this.line(this.width/2-188+i,this.height/2-22,this.width/2-188+i,this.height/2+22,"black",1)
-
-}
-for(let i=this.width/2-288;i<this.width/8+288;i=i+(((this.width/2-24)-(this.width/2-188))/4)){
-
-  this.line(this.width/2-188+i,this.height/2-22,this.width/2-188+i,this.height/2+22,"black",1)
+  this.line(this.width/2-166+i,this.height/2-22,this.width/2-166+i,this.height/2+22,this.colors[j],40)
 
 }
+for(let i=this.width/2-288 ,j=1;i<this.width/8+288;i=i+(((this.width/2-24)-(this.width/2-188))/4),j++){
+  if(j==1){
+    this.line(this.width/2-212+i,this.height/2-22,this.width/2-212+i,this.height/2+22,"black",42)
+  }
+  else{this.line(this.width/2-212+i,this.height/2-22,this.width/2-212+i,this.height/2+22,this.colors[j],40)}
+  
+
+}
+
 this.printCategories()
 }
 
