@@ -6,7 +6,6 @@ const bcryptSalt = 10
 const  zxcvbn = require('zxcvbn');
 zxcvbn('Tr0ub4dour&3');
 const uploadCloud = require('../config/cloudinary.js');
-
 router.get("/sign-up", (req, res, next) => {
   try {
     res.render("auth/sign-up");
@@ -14,7 +13,6 @@ router.get("/sign-up", (req, res, next) => {
     next(e);
   }
 });
-
 router.post("/sign-up", uploadCloud.single('photo'),(req,res,next)=>{
   const username = req.body.username
   const password = req.body.password
@@ -22,11 +20,8 @@ router.post("/sign-up", uploadCloud.single('photo'),(req,res,next)=>{
   const passwordStrengh = zxcvbn(password)
   const salt = bcrypt.genSaltSync(bcryptSalt)
   const hashPass = bcrypt.hashSync(password,salt)
-
-
   //const isPassword = password.match(/[A-Z]/g)
   //if(!isPasswordOk){}
-
   //Making sure username and password are not empty
   if(username === "" || password === ""){
     res.render("auth/sign-up", {
@@ -42,8 +37,6 @@ router.post("/sign-up", uploadCloud.single('photo'),(req,res,next)=>{
       suggestion : passwordStrengh.feedback.suggestions[0]
     });
   }
-  
-
   //Making sure that user doens't exist already
 User.findOne({"username":username})
   .then(user => {
@@ -51,8 +44,6 @@ User.findOne({"username":username})
       res.render("auth/sign-up",{
       errorMessage: "The username already exists"
     })
-    
-
   return
 }
 console.log(req.file)
@@ -72,13 +63,10 @@ console.log(req.file)
       })
       return
     }
-
   }
-  
 else{
     const imgPath = req.file.url
     const imgName = req.file.originalname
-
     User.create({username, password: hashPass , avatar:"", imgPath, imgName})
     .then(() => {
       res.redirect("/")
@@ -87,11 +75,8 @@ else{
       next(error)
     })
   } 
-
 })
-  
   })
-  
   router.get("/login",(req,res,next)=>{
     try{
       res.render("auth/login")
@@ -100,17 +85,14 @@ else{
       next(e)
     }
   })
-
   router.get("/logout", (req,res,next)=>{
     req.session.destroy(()=>{
       res.redirect("/login")
     })
   })
-  
   router.post("/login" ,(req,res,next) =>{
     const username = req.body.username
     const password = req.body.password
-
     User.findOne({"username" : username})
     .then(user => {
       //TODO check if user exists 
@@ -130,7 +112,4 @@ else{
       }
     })
   })
-
-
-
   module.exports = router;

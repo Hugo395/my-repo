@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('IronGenerator JS imported successfully!');
 }, false);
 let score=0
-
 //do{
 //document.getElementsByClassName("board").innerHTML =``
 /*document.getElementsByClassName("board").innerHTML = `
@@ -15,7 +14,9 @@ let score=0
 const $canvas = document.getElementById("canvas")
 const $trivia= new Trivia($canvas)
 $trivia.displayBoard()
-
+// document.getElementById("gotoyourpage").onclick = function () {
+//   location.href = profile.hbs
+// };
 document.getElementById('dice').addEventListener('click',() => {
   event.preventDefault();
   const category_id = Math.floor(Math.random()*24) +9
@@ -35,8 +36,6 @@ axios
   document.getElementById('ShowMe').innerHTML += newCharacterHTML;
   //debugger
   let timerQuestion = setTimeout(() => {
-
-    
     const question = document.createElement('H4')
     question.setAttribute("id","question")
     const possibleResponses = response.data.results[0].incorrect_answers
@@ -101,7 +100,6 @@ axios
 //}
 //while(score<2)
 //document.getElementsByClassName("board").innerHTML= `<h1>Game ended</h1>`
-
 /////////////////////////////////////Auxiliary functions///////////////////////////////////////////////////
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -109,7 +107,6 @@ function shuffle(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
-
 function escapeHtml(text) {
   return text
       .replace(/&amp;/g,'&' )
