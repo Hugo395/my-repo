@@ -1,0 +1,45 @@
+ <h1>{{title}}</h1>
+{{#if currentUser}}
+  <h3>Welcome {{currentUser.username}}</h3>
+{{/if}}
+<div>
+<form action="/profile/edit"></form>
+</div>
+
+<form id="form"action="/sign-up" method="POST" enctype="multipart/form-data">
+ <div>
+   <label for ="">Date of birth</label>
+  <input id="dateOfBirth" type="text" name="Date of birth" placeholder="year - month - day" value="{{user.dateOfBirth}}">
+  </div>
+
+  <div>
+    <label for ="adress">Adress</label>
+  <input id="adress" type="text" name="adress" placeholder="Adress" value="{{user.adress}}">
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+  <input id ="email" type="text" name="Email" placeholder="Email" value="{{user.email}}">
+  </div>
+<div>
+  <label>Avatar</label>
+  <select name="avatar" id="menu" value="{{user.avatar}}">
+    <option value=""></option>
+    <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar1@adorable.io.png"></option>
+    <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar2@adorable.io.png"></option>
+    <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar3@adorable.io.png"></option>
+    <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar4@adorable.io.png"></option>
+    <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar5@adorable.io.png"></option>
+    <option value="https://api.adorable.io/avatars/100/avatar1@adorable.io.png" title="https://api.adorable.io/avatars/100/avatar6@adorable.io.png"></option>
+  </select>
+  </div>
+
+<div>
+    <label>Photo</label>
+  <input type="file" name="photo">
+</div>
+ <div>
+  <button type="submit">Update Your Profile</button>
+</div>
+</form>
+<a href="/main"> Back to Game</a>
