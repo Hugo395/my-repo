@@ -5,7 +5,7 @@ class Trivia{
     this.height= this.canvas.height
     this.width = this.canvas.width
     this.categories = this.categoriesFill(5,37)
-    this.colors=['red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray','orange','purple', ];
+    this.colors=['red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray','orange','purple'];
   }
 
 categoriesFill(numberOfCategories,numberOfSpots){
@@ -23,6 +23,7 @@ printCategories(){
   this.ctx.lineWidth = 2
   this.ctx.strokeStyle ="black"
   this.ctx.font = "30px Arial";
+  //////////////////Upper arc////////////////////////
   this.ctx.strokeText("E", 440, 50)
   this.ctx.strokeText("S", 540, 50)
   this.ctx.strokeText("H", 610, 80)
@@ -31,7 +32,7 @@ printCategories(){
   this.ctx.strokeText("A", 670, 140)
   this.ctx.strokeText("H", 280, 210)
   this.ctx.strokeText("P", 700, 210)
-//////////////////////////////////////////
+//////////////////Lower arc////////////////////////
 
   this.ctx.strokeText("A", 440, 475)
   this.ctx.strokeText("H", 540, 475)
@@ -41,7 +42,30 @@ printCategories(){
   this.ctx.strokeText("E", 670, 390)
   this.ctx.strokeText("S", 280, 310)
   this.ctx.strokeText("P", 700, 310)
+
+  /////////////  this.ctx.strokeText("A", 440, 475)
+  this.ctx.strokeText("P", 324,260 )
+  this.ctx.strokeText("E", 365,260 )
+  this.ctx.strokeText("S", 406,260 )
+  this.ctx.strokeText("H", 447,260 )
+
+  this.ctx.strokeText("S", 530,260 )
+  this.ctx.strokeText("H", 572,260 )
+  this.ctx.strokeText("A", 614,260 )
+  this.ctx.strokeText("P", 656,260 )
+  //////////////////Vertical////////////////////////
+
+  this.ctx.strokeText("E", 490,95 )
+  this.ctx.strokeText("S", 490,136 )
+  this.ctx.strokeText("H", 490,177 )
+  this.ctx.strokeText("A", 490,218 )
+  this.ctx.strokeText("E", 490,300 )
+  this.ctx.strokeText("S", 490,341 )
+  this.ctx.strokeText("H", 489,382 )
+  this.ctx.strokeText("A", 490,423 )
+
   this.ctx.closePath()
+
   }
 
 circle (x,y,radius,color,radians){
