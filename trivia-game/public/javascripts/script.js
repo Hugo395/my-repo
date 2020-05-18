@@ -11,14 +11,20 @@ let score=0
 </div>
 `
 */
+
 const $canvas = document.getElementById("canvas")
 const $trivia= new Trivia($canvas)
+const player = new Player($trivia)
+keysPressed()
 $trivia.displayBoard()
+player.printPlayer(this.x,this.y,"pink")
+
 // document.getElementById("gotoyourpage").onclick = function () {
 //   location.href = profile.hbs
 // };
 document.getElementById('dice').addEventListener('click',() => {
   event.preventDefault();
+  
   const category_id = Math.floor(Math.random()*24) +9
   let button = document.getElementById('dice')
   button.style.visibility = "hidden"
@@ -115,4 +121,30 @@ function escapeHtml(text) {
       .replace(/&quot;/g,'"')
       .replace(/&#039;/g,"'")
       .replace(/&deg;/g,"°")
+}
+
+function keysPressed(){
+    
+  window.addEventListener("keydown", event => {
+      if(event.keyCode ===37 ||event.keyCode === 38||event.keyCode === 39||event.keyCode === 40){
+        console.log(event.keyCode)
+        keysLogic(event.keyCode)
+        player.playerIndex(event.keyCode)
+        player.playerLocation()
+        player.printPlayer()
+      }
+  })
+  
+}
+
+function keysLogic(pressedkey){
+  console.log(pressedkey)
+  switch(pressedkey){
+    case 37:  console.log("Left clicked") ;break;//Left arrow 
+    case 38:  console.log("Up clicked");break;//Up arrow
+    case 39:  console.log("Right clicked");break;//Righ arrow
+    case 40:  console.log("Down clicked");break;//Down arrow
+    default: console.log("Ups")
+  }
+
 }
