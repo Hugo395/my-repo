@@ -5,7 +5,7 @@ class Trivia{
     this.height= this.canvas.height
     this.width = this.canvas.width
     this.categories = this.categoriesFill(5,37)
-    this.colors=['red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray','orange','purple'];
+    this.colors=['red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray', 'orange','purple', 'red', 'blue', 'gray','orange','purple']
   }
 
 categoriesFill(numberOfCategories,numberOfSpots){
@@ -43,7 +43,7 @@ printCategories(){
   this.ctx.strokeText("S", 280, 310)
   this.ctx.strokeText("P", 700, 310)
 
-  /////////////  this.ctx.strokeText("A", 440, 475)
+  ///////////// Horizontal
   this.ctx.strokeText("P", 324,260 )
   this.ctx.strokeText("E", 365,260 )
   this.ctx.strokeText("S", 406,260 )
@@ -165,7 +165,6 @@ for(let i=this.width/2-288 ,j=1;i<this.width/8+288;i=i+(((this.width/2-24)-(this
   }
   else{this.line(this.width/2-212+i,this.height/2-22,this.width/2-212+i,this.height/2+22,this.colors[j],40)}
   
-
 }
 
 this.printCategories()

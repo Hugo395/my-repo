@@ -24,6 +24,7 @@ player.printPlayer(this.x,this.y,"pink")
 // };
 document.getElementById('dice').addEventListener('click',() => {
   event.preventDefault();
+  
   const category_id = Math.floor(Math.random()*24) +9
   let button = document.getElementById('dice')
   button.style.visibility = "hidden"
@@ -128,6 +129,9 @@ function keysPressed(){
       if(event.keyCode ===37 ||event.keyCode === 38||event.keyCode === 39||event.keyCode === 40){
         console.log(event.keyCode)
         keysLogic(event.keyCode)
+        player.playerIndex(event.keyCode)
+        player.playerLocation()
+        player.printPlayer()
       }
   })
   
